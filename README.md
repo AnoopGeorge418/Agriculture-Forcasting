@@ -95,6 +95,22 @@ Configure these in your production environment or `.env` files:
 - **What-if Analysis**: A custom prediction form to test "what-if" scenarios based on the last 12 months of price data.
 - **Risk Mitigation**: AI-driven strategy cards providing procurement and supply chain advice based on volatility forecasts.
 
+## 🌐 Deployment
+
+### Backend (Render.com)
+This project is pre-configured for **Render.com** using the `render.yaml` blueprint.
+1. Connect your GitHub repository to Render.
+2. Select **"Blueprint"** and choose `Agriculture-Forecasting`.
+3. Render will automatically build the Docker container and deploy it.
+4. **Important**: The free tier has 512MB RAM. The `Dockerfile` is optimized to use `tensorflow-cpu` and a single Gunicorn worker to stay within these limits.
+
+### Frontend (Vercel)
+The Next.js frontend is best deployed on **Vercel**.
+1. Connect your GitHub repository to Vercel.
+2. Add an Environment Variable:
+   - `NEXT_PUBLIC_API_URL`: Your Render backend URL (e.g., `https://agri-forecast-backend.onrender.com`).
+3. Vercel will handle the build and deployment automatically.
+
 ## 🤝 Contributing
 1. Fork the repo.
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`).

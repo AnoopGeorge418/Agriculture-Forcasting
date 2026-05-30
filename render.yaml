@@ -3,7 +3,6 @@ services:
   - type: web
     name: agri-forecast-backend
     env: docker
-    repo: https://github.com/YOUR_USERNAME/YOUR_REPO_NAME # User will need to update this
     rootDir: backend
     plan: free
     region: oregon
