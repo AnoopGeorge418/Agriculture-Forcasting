@@ -1,0 +1,29 @@
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - 'backend/**'
+      - 'pyproject.toml'
+  pull_request:
+    paths:
+      - 'backend/**'
+      - 'pyproject.toml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      - name: Install dependencies
+        run: cd backend && uv sync
+      - name: Lint with black
+        run: cd backend && uv run black --check src
+      - name: Build Docker image
+        run: docker build -t agri-backend -f backend/Dockerfile backend/

@@ -1,0 +1,30 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/data:/app/data
+      - ./backend/models:/app/models
+      - ./backend/outputs:/app/outputs
+    environment:
+      - PORT=8000
+      - DATA_RAW=data/raw/agricultural_prices.csv
+      - DATA_CLEANED=data/cleaned/cleaned_prices.csv
+      - DATA_FORECASTS=data/forecasts/12_month_forecast.csv
+      - MODELS_DIR=models/
+      - OUTPUTS_DIR=outputs/plots/
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    restart: always
