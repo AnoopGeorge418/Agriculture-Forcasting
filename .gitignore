@@ -23,13 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# Models & Data (Exclude large files or generated assets if needed)
-backend/models/*.pkl
-backend/models/*.keras
-backend/data/cleaned/*.csv
-backend/data/forecasts/*.csv
-backend/outputs/plots/*.png
-
 # IDEs
 .vscode/
 .idea/
