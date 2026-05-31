@@ -3,9 +3,19 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+interface HistoricalPrice {
+  date: string;
+  avg_monthly_price: number;
+}
+
+interface ForecastPrice {
+  date: string;
+  forecasted_price: number;
+}
+
 interface PriceChartProps {
-  historical: any[];
-  forecast: any[];
+  historical: HistoricalPrice[];
+  forecast: ForecastPrice[];
 }
 
 const PriceChart: React.FC<PriceChartProps> = ({ historical, forecast }) => {

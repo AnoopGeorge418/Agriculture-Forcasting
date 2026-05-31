@@ -27,7 +27,7 @@ const PredictionForm = () => {
         last_12_months: numericInputs
       });
       setPrediction(res.data.prediction);
-    } catch (err) {
+    } catch {
       setError("Failed to get prediction. Ensure backend is running.");
     } finally {
       setLoading(false);

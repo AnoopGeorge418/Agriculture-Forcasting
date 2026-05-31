@@ -7,8 +7,23 @@ import PriceChart from '@/components/PriceChart';
 import PredictionForm from '@/components/PredictionForm';
 import StrategyCards from '@/components/StrategyCards';
 
+interface HistoricalPrice {
+  date: string;
+  avg_monthly_price: number;
+}
+
+interface ForecastPrice {
+  date: string;
+  forecasted_price: number;
+}
+
+interface DataState {
+  historical: HistoricalPrice[];
+  forecast: ForecastPrice[];
+}
+
 export default function Dashboard() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<DataState | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,7 +33,7 @@ export default function Dashboard() {
       const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/data`);
       setData(res.data);
       setError(null);
-    } catch (err) {
+    } catch {
       setError("Unable to connect to the prediction engine. Please ensure the backend is running.");
     } finally {
       setLoading(false);
@@ -26,6 +41,7 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData();
   }, []);
 
