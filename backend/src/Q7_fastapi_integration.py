@@ -40,7 +40,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="AgriPrice Forecast API", lifespan=lifespan)
 
 # Enable CORS for frontend integration
-allowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "https://agri-forecast-backend.onrender.com").split(",")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
